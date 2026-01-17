@@ -1,0 +1,258 @@
+/* ===== ОБЩИЕ СТИЛИ ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: radial-gradient(circle at center, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* ===== ВЕРХНЯЯ ПАНЕЛЬ ===== */
+.top-panel {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.time-display {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ВРЕМЯ (верхняя строка) */
+.time-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.time-label {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #BB86FC;
+    min-width: 100px;
+}
+
+.time-values {
+    display: flex;
+    gap: 40px;
+}
+
+.time-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-system {
+    font-size: 0.9em;
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+.time-value {
+    font-size: 2.2em;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* СЛАЙДЕР (средняя секция) */
+.slider-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.slider-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.utc-slider {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(to right, #1a1a2e, #BB86FC, #1a1a2e);
+    border-radius: 4px;
+    outline: none;
+}
+
+.utc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #BB86FC;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.8);
+}
+
+.utc-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #BB86FC;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.8);
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.current-tz {
+    font-weight: bold;
+    color: #BB86FC;
+    font-size: 1.1em;
+}
+
+/* ИНФО (нижняя строка) */
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.95em;
+}
+
+.system-name {
+    opacity: 0.8;
+}
+
+.day-progress {
+    font-weight: bold;
+    color: #FF9800;
+}
+
+/* ===== TOOLTIP ===== */
+.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip-question {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 20px;
+    text-align: center;
+    background: rgba(187, 134, 252, 0.2);
+    color: #BB86FC;
+    border: 1px solid #BB86FC;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.tooltip-question:hover {
+    background: rgba(187, 134, 252, 0.4);
+    transform: scale(1.1);
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 300px;
+    background-color: rgba(26, 26, 46, 0.98);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    position: absolute;
+    z-index: 1001;
+    top: 100%;
+    left: 0;
+    margin-top: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+    line-height: 1.5;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 20px;
+    border: 8px solid transparent;
+    border-bottom-color: rgba(26, 26, 46, 0.98);
+}
+
+.tooltip-wrapper:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ===== CANVAS ===== */
+canvas { 
+    border: 2px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 50%; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    cursor: grab;
+    margin-top: 180px; /* Отступ от верхней панели */
+}
+
+canvas:active { cursor: grabbing; }
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    .top-panel {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .time-values {
+        gap: 20px;
+    }
+    
+    .time-value {
+        font-size: 1.8em;
+    }
+    
+    canvas {
+        width: 90vw;
+        height: 90vw;
+        max-width: 450px;
+        max-height: 450px;
+        margin-top: 200px;
+    }
+}

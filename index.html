@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal Clock • decimaltime.eu</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ОДИН верхний блок вместо controls и info -->
+    <div class="top-panel">
+        <div class="time-display">
+            <div class="time-row">
+                <span class="time-label">UTC+0</span>
+                <div class="time-values">
+                    <div class="time-group">
+                        <span class="time-system">24h</span>
+                        <span id="realTime" class="time-value">00:00:00</span>
+                    </div>
+                    <div class="time-group">
+                        <span class="time-system">10h</span>
+                        <span id="decimalTime" class="time-value">00:00:00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-section">
+                <div class="slider-header">
+                    <span>Часовой пояс</span>
+                    <div class="tooltip-wrapper">
+                        <span class="tooltip-question">?</span>
+                        <div class="tooltip-text">
+                            <strong>No DST</strong><br>
+                            DST (Daylight Saving Time) - Перевод часов весной/осенью для экономии энергии.<br>
+                            <em>Мы использует время без сезонных изменений.</em>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-container">
+                    <input 
+                        type="range" 
+                        id="utcSlider"
+                        min="-12" 
+                        max="14" 
+                        value="0"
+                        step="1"
+                        class="utc-slider"
+                    >
+                    <div class="slider-labels">
+                        <span>-12</span>
+                        <span id="tzLabel" class="current-tz">UTC+0</span>
+                        <span>+14</span>
+                    </div>
+                </div>
+                
+                <div class="progress-info">
+                    <div class="system-name" id="systemName">Decimal (10h:100m:100s)</div>
+                    <div class="day-progress" id="progress">00,0000% суток</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <canvas id="clock" width="500" height="500"></canvas>
+
+    <!-- Скрытый select для обратной совместимости -->
+    <select id="timezoneSelect" style="display:none;"></select>
+
+    <script src="script.js"></script>
+</body>
+</html>
